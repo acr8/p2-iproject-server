@@ -1,5 +1,4 @@
 const errorHandler = (err, req, res, next) => {
-  // console.log(err, "<=============");
   switch (err.name) {
     case "JsonWebTokenError":
       res.status(401).json({ message: "Invalid Token" });
@@ -8,7 +7,6 @@ const errorHandler = (err, req, res, next) => {
       res.status(401).json({ message: "Token Expired" });
       break;
     case "SequelizeValidationError":
-      // const error = err.errors.map((e) => e.message);
       res.status(400).json({ message: err.errors[0].message });
       break;
     case "InvalidEmailOrPassword":
@@ -17,8 +15,20 @@ const errorHandler = (err, req, res, next) => {
     case "SequelizeUniqueConstraintError":
       res.status(400).json({ message: "Email Already Exist" });
       break;
-    case "InvalidEmail":
-      res.status(401).json({ message: "Invalid Email Or Password" });
+    case "EmailIsEmpty":
+      res.status(400).json({ message: "Email is required" });
+      break;
+    case "PasswordIsEmpty":
+      res.status(400).json({ message: "Password is required" });
+      break;
+    case "InvalidAccess":
+      res.status(401).json({ message: "Invalid Access" });
+      break;
+    case "Forbidden":
+      res.status(403).json({ message: "Unauthorized" });
+      break;
+    case "DataNotfound":
+      res.status(404).json({ message: "Data not found" });
       break;
     default:
       res.status(500).json({ message: err });
