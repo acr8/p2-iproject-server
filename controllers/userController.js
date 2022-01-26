@@ -21,12 +21,17 @@ class Controller {
   static async login(req, res, next) {
     try {
       const {email, password} = req.body;
-      const userData = await User.findOne({where: {email}})
+      const userData = await User.findOne({where: {
+        email:email}})
 
       if (!email) { throw { name: "EmailIsEmpty" };}
       if (!password) { throw { name: "PasswordIsEmpty" };}
 
-      if (!userData || !compareHash(password, userData.password)) {
+      if (!compareHash(password, userData.password)) {
+        throw { name: "InvalidEmailOrPassword" };
+      }
+
+      if (!userData) {
         throw { name: "InvalidEmailOrPassword" };
       }
 
@@ -88,6 +93,7 @@ class Controller {
       next(err);
     }
   }
+
 }
 
 module.exports = Controller;

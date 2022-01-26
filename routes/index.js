@@ -10,9 +10,12 @@ Router.post("/login", userController.login);
 Router.post("/googleSignIn", userController.googleSignIn);
 
 Router.get("/products", productController.getProduct)
+Router.get("/productsEtsy", productController.getEtsyProduct)
+
+Router.post('/transaction', productController.postTransaction)
+
 Router.get("/products/categories", productController.getProductCategories)
 Router.get("/products/:productId", productController.getProductById)
-
 Router.get("/cart", authentication, productController.getCart)
 Router.post("/cart/:productId", authentication, productController.postCart)
 

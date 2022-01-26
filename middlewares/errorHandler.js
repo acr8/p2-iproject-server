@@ -31,6 +31,7 @@ const errorHandler = (err, req, res, next) => {
       res.status(404).json({ message: "Data not found" });
       break;
     default:
+      console.log(err);
       res.status(500).json({ message: err });
       break;
   }
