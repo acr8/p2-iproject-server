@@ -14,7 +14,6 @@ Router.get("/productsEtsy", productController.getEtsyProduct)
 
 Router.post('/transaction', productController.postTransaction)
 
-Router.get("/products/categories", productController.getProductCategories)
 Router.get("/cart", authentication, productController.getCart)
 Router.get("/productsEtsy/:listingId", productController.getEtsyProductById)
 Router.get("/products/:productId", productController.getProductById)
