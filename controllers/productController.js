@@ -36,7 +36,7 @@ class Controller {
         `https://fakestoreapi.com/products/${id}`
       );
 
-      if (!response) {
+      if (!response.data) {
         throw { name: "DataNotFound" };
       } else {
         res.status(200).json(response.data);
@@ -46,28 +46,6 @@ class Controller {
     }
   }
 
-  static async getProductCategories(req, res, next) {
-    try {
-      const response = await axios.get(
-        `https://fakestoreapi.com/products/categories`
-      );
-      res.status(200).json(response.data);
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  static async getProductsByCategory(req, res, next) {
-    try {
-      const categoryName = req.params.categoryName;
-      const response = await axios.get(
-        `https://fakestoreapi.com/products/category/${categoryName}`
-      );
-      res.status(200).json(response.data);
-    } catch (err) {
-      next(err);
-    }
-  }
 
   static async getCart(req, res, next) {
     try {
