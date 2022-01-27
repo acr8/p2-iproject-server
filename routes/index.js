@@ -15,12 +15,13 @@ Router.get("/productsEtsy", productController.getEtsyProduct)
 Router.post('/transaction', productController.postTransaction)
 
 Router.get("/products/categories", productController.getProductCategories)
-Router.get("/products/:productId", productController.getProductById)
 Router.get("/cart", authentication, productController.getCart)
+Router.get("/productsEtsy/:listingId", productController.getEtsyProductById)
+Router.get("/products/:productId", productController.getProductById)
 Router.post("/cart/:productId", authentication, productController.postCart)
 
 Router.delete("/cart/:id", authentication, cartAuthorization, productController.deleteCart)
-Router.get("/products/category/:categoryName", productController.getProductsByCategory)
+// Router.get("/products/category/:categoryName", productController.getProductsByCategory)
 
 
 module.exports = Router;

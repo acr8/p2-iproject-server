@@ -191,6 +191,32 @@ class Controller {
     }
   }
 
+
+  static async getEtsyProductById(req, res, next) {
+    try {
+      const id = req.params.listingId;
+      let filter = {
+        api_key: process.env.api_key,
+ 
+      };
+
+      const response = await axios({
+        method: "get",
+        url: `https://openapi.etsy.com/v2/listings/${id}?includes=Images`,
+        params: filter,
+      });
+      if (!response) {
+        throw { name: "DataNotFound" };
+      } else {
+        res.status(200).json(response.data);
+      }
+
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   static async postTransaction(req, res, next) {
     try {
       let randomNumber = Math.floor(Math.random() * 1000000);
