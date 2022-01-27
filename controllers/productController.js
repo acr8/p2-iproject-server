@@ -176,7 +176,7 @@ class Controller {
       let filter = {
         api_key: process.env.api_key,
         offset: 0,
-        limit: 6,
+        limit: 8,
       };
 
       const response = await axios({
